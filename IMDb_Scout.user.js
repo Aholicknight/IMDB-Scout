@@ -1,19 +1,19 @@
 // ==UserScript==
-// @name           IMDb Scout
-// @namespace      https://greasyfork.org/users/1057-kannibalox
-// @description    Add links from IMDb pages to torrent sites -- easy downloading from IMDb
+// @name           IMDB Scout Revamped
+// @author         Aholicknight / kannibalox
+// @namespace      https://github.com/Aholicknight/
+// @description    Revamped version of IMDB Scout for updated IMDB page layout. Add links from IMDb pages to torrent sites -- easy downloading from IMDb
 //
-// Preference window for userscripts, hosted by greasyfork:
 // @require     https://greasyfork.org/libraries/GM_config/20131122/GM_config.js
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
 //
-// @version        5.3.1
-// @include        http*://*.imdb.tld/title/tt*
-// @include        http*://*.imdb.tld/search/title*
-// @include        http*://*.imdb.tld/user/*/watchlist*
-// @include        http*://*.imdb.com/title/tt*
-// @include        http*://*.imdb.com/search/title*
-// @include        http*://*.imdb.com/user/*/watchlist*
+// @version      5.3.5
+// @match        https*://*.imdb.tld/title/tt*
+// @match        https*://*.imdb.tld/search/title*
+// @match        https*://*.imdb.tld/user/*/watchlist*
+// @match        https*://*.imdb.com/title/tt*
+// @match        https*://*.imdb.com/search/title*
+// @match        https*://*.imdb.com/user/*/watchlist*
 //
 // @connect      *
 // @grant        GM_log
@@ -25,394 +25,6 @@
 // @grant        GM_registerMenuCommand
 //
 // ==/UserScript==
-/*---------------------Version History--------------------
-1.00    -    Initial public release, everything works on barebones greasemonkey
-
-1.50    -    Added the ability to select which sites to load from the GM script commands
-        -    Moved the required method to userscripts
-        -    Removed FH, NZB, Avax
-
-1.60    -    Added style elements and shading to display on imdb
-
-1.62    -    Fixed bug:SCC-ARC not removing when unchecked
-        -    Alphabetized list
-
-1.70    -    Cleaned up code
-        -    Added option to not run script on page load
-
-1.71    -    Deprecated action-box field
-
-1.80    -    Added icons that link to OpenSubs, Criticker, RT, YT
-
-1.81    -    Added support for tv, only displays on shows listed as 'tv series'
-        -    Added support for icheckmovies at top bar.
-
-1.82    -    Fixed title parsing for tv shows.
-
-1.83    -    Fixed dhive not working properly
-
-1.90    -    Set height of preference window to 450px, added scroll bar
-
-1.91    -    Added another 11 torrent sites
-
-2.00    -    Added auto updater
-
-2.01    -    Added TC, FreshOn, TVT, STF, CC
-        -    Cleaned up code (tabbing)
-        -    Removed THR
-        -    Added TV-Rage to top bar
-
-2.02    -    Added PS, THC, HH, HDStar
-        -    Fixed CC false positive
-
-2.03    -    TehC now uses tt
-        -    Added Raymoz mod for AT
-
-2.04    -    Added HDbits
-        -    Added TL
-
-2.10    -    Added genre page search functionality
-
-2.11    -    Fixed ICM because Nuked was whining
-
-2.12    -    Removed tvrage
-        -    Fixed iCM (added tt)
-        -    Added HDVNbits
-        -    Changed RevTT to .me
-        -    Added HDT
-        -    removed autoupdate
-
-2.13    -    removed xvidme
-        -    reinstated autoupdate
-        -    removed google chrome code
-        -    fixed hdvn and hdt issues
-
-2.14    -    Added @grant entries for API access
-        -    Fixed tt parser to work on imdb pages with referral info in url
-
-2.2     -    Switch preferences window to use GM_config
-        -    Consolidate icon & site lists
-        -    Added IPT, KASS, sHD, and HDW
-        -    Fix "Open All" link
-        -    Add option for strikethroughs on search page
-        -    Removed arrays from search URLs
-        -    Spring cleaning
-
-2.21    -    Added SSL to TVT, HDME, TC, AHD, IPT, SCC
-        -    Added SSL option for CG
-        -    Added GFT, GFT-Gems, GFT-TV
-        -    Fixed SCC, SCC-ARC search URL
-        -    Removed TheBox, TheDVDClub
-        -    Added more comments, cleaned up some more stuff
-
-2.22    -    Fixed TehC, BTN, BTN-Req, THC
-        -    Added a bunch of TV sites, courtesy of seedless
-        -    Added "both" option for sites, and made changes
-             to allow coexistence of movie and TV sites with
-             the same name
-        -    Code re-organization, documentation
-        -    Re-added code to allow an array for searchUrl
-
-2.22.1  -    Minor fixes
-
-2.23    -    Fixed THC, BTN
-        -    Distinguish between movies and TV on search page
-
-2.24    -    Separate load_on_start option for search page
-        -    Fix search_string on search page
-
-2.25    -    Added some helpful text when no sites have been enabled
-
-2.26    -    Added code to show links when on pages besides just the "front" one
-             (e.g. http://www.imdb.com/title/tt2310332/reference)
-
-2.26.1  -    Correctly detect TV shows when on aforementioned pages.
-
-2.3     -    Incorporate a bunch of changes courtesy of Inguin:
-             - Added SSL to AT, TE, D-noid, TG, YT, RT
-             - Changed tracker short titles to canonical form ADC, KG
-             - Updated D-noid from .me to .pw
-             - Fixed broken AT search; also updated to use .me so avoids redirect
-             - Added BitHQ, ET (eutorrents)
-             - Removed two broken THC; replaced with one fixed
-             - Removed iplay, horrorhaven, hdstar, scandbits, leecherslair
-             - Removed needless CG http/https duplication - plenty of listed sites self-sign
-             - A-Z sites list for readability
-             - Cleanup YT search string
-             - Copyedits
-             - Clean up code (tabs, trailing spaces)
-        -    Use consistent naming style
-        -    Added Letterboxd, Subscene to icons
-        -    Added options for showing icons
-
-2.31    -    Added preliminary check for TSH
-        -    Change all SCC links to .org
-
-2.31.1  -    Typo fix
-
-2.32    -    On uncertain pages, display both movie and TV sites
-
-2.33    -    Add year to possible search params
-        -    Add rutorrent
-
-2.33.1  -    Change KG to .in
-
-2.33.2  -    Change TSH to .me
-
-2.34    -    Updated AT, TPB
-             - Removed HDWing, TVT and CHDBits
-             - Added RARBG
-             - Re-added reverse match checking to support rarbg
-
-2.35    -    Fixed YouTube icon, add SubtitleSeeker icon
-        -    Added FL.ro, bB, BHD, HDS
-             - Fixed TL, TehC, HDb, HDVN, AHD, KG
-             - Renamed reverseMatch to positiveMatch
-
-2.36    -    Added Wikipedia to icon sites
-
-2.36.1  -    Typo fix
-
-2.37    -    Add PxHD
-
-2.38    -    Fix subtitle seeker
-        -    Added CG-c
-        -    Added FilmAffinity
-        -    Added option to skip http check entirely
-
-2.38.1  -    Typo fix
-
-2.38.2  -    Global replace parameters
-
-2.38.3  -    Typo fix
-
-3.00    -    Clean up some formatting
-        -    Add support for new IMDb page format
-        -    Update jquery
-
-3.0.1   -    Added Classix
-
-3.0.2   -    Updated documentation/comments
-
-3.0.3   -    Removed GOEM, FY, PS, MT
-        -    Added Metacritic, CanIStream.It?, AllMovie, Facebook, Amazon, Cartoon Chaos, MySpleen, Secret Cinema
-        -    Fixed Wikipedia icon
-
-3.1     -    Handle HTTP failures less silently
-
-3.1.1   -    Fix KASS
-
-3.1.2   -    Fix TPB, TE, HDT
-        -    Add MTV, DVDSeed
-
-3.1.3   -    Add M-T, UHDB, HDC, Blu-ray.com
-        -    Fix scenehd, RT
-
-3.1.4   -    Add HDClub
-
-3.2     -    Fix the button on new-style pages
-
-3.2.1   -    Fix AHD
-
-3.3     -    Be less obnoxious about failed calls
-
-3.4     -    Add Netflix icon
-        -    Remove a default parameter to satisfy Chrome
-
-3.5     -    Add KZ, NNM, BB-HD, t411, TD, Rutor
-        -    Fix HDClub
-        -    Fix preferences in Chrome, sort sites properly
-
-3.5.1   -    Remove DHive, Fix AHD
-
-4.0     -    Bring in UI changes courtesy of janot
-        -    Add spaceEncode and goToUrl to site options
-        -    Add option to show results as links instead of text
-        -    Differentiate between missing and logged out
-        -    General refactoring
-
-4.1     -    Add RARAT
-
-4.2     -    Fix t411
-        -    Use magic .tld domain in @include
-
-4.3     -    Set @connect in metadata block
-
-4.3.1   -    Fix THC
-
-4.3.2   -    Add AR, TtN
-        -    Add year and "trailer" to youtube search
-        -    Fix M-team
-
-4.3.3   -    Fix BitHQ, PTP-Req, SCC
-
-4.3.4   -    Fix M-team, myspleen, avistaz, eutorrents
-        -    Removed KAT
-
-4.3.5   -    Fix IPT, Freshon
-        -    Add ExtraTorrent
-
-4.3.6   -    Fix Demonoid, EuTorrents (now CinemaZ)
-        -    Fix "Actually search for torrents" option
-        -    Add PrivateHD for movies and tv
-
-4.3.7   -    Apply CinemaZ fixes to AvistaZ as well
-
-4.3.8   -    Fix SurrealMoviez and MySpleen, switch to new PTP url
-
-4.3.9   -    Fix criticker, add CN
-
-4.3.10  -    Fix Netflix, MTV
-
-4.3.11  -    Add CHD back
-
-4.3.12  -    Fix typo
-
-4.4     -    Fix BeyondHD
-        -    Allow unicode when searching by name
-
-4.4.1   -    Add trakt.tv
-
-4.4.2   -    Added XS, HD-S, PTN, TBD, Blutopia
-        -    Removed Freshon, CN, ExT, t411, SCC
-        -    Fixed SC, TE, TG, Tik
-        -    Add .com for script runners that don't support .tld
-
-4.5     -    (Chameleon)
-        -    Added an option to run on ILC request pages
-        -    Fixed running on reference pages (new imdb style)
-        -    Added a delay of 1 second between loading the same site (by domain) - no more popcorn quota timeouts
-        -    Fixed running on search pages
-
-4.5.1   -    Removed (dead): BitHQ, TehC, FSS, ExtraTorrent, Cine-Clasico, and Secret-Cinema
-        -    Fixed the hack on goToUrl
-
-4.5.2   -    Fixed filelist.ro, Tik, TD
-        -    Added HDHome, HDU, OurBits
-
-4.5.3   -    Fixed TG, TE, HDSpace
-        -    Added XS
-
-4.5.4   -    Fixed HDU
-
-4.5.5   -    Fixed BHD
-
-4.6     -    Option to highlight if the movie is missing from PTP
-
-4.7     -    Added option to ignore the movie/tv distinction
-
-4.7.1   -    Fix blutopia, hdchina, indenting
-
-4.7.2   -    Fix SDBits, M-T
-        -    Add TTGg
-
-4.7.3   -    Enable on https versions of imdb sites
-        -    Add TTG
-
-4.8.0   -    Add FinVip, JoyHD, TO, TP, TS, TVCK
-        -    Fix TE, HDH, CZ, Subscene
-        -    Remove SubtitleSeeker
-        -    Rip out all site-specific code
-        -    Fix up minor code smells
-        -    Allow config name to be different from site name
-
-4.8.1   -    Add SP
-
-4.8.2   -    Add TMDB
-
-4.8.3   -    Add TGx
-        -    Fix TTG, JoyHD, HDH
-        -    Remove duplicate TMDB
-
-4.9.0   -    Add support for a user's watchlist
-
-4.10.0  -    Add support for icon sites on the reference view
-        -    Add HTTPS for icon sites that support it
-
-4.11.0  -    Fix search_string
-
-4.11.1  -    Remove Blutopia
-             Fix IPT
-
-4.11.2  -    Add unogs
-
-4.11.3  -    Fix TVDB
-
-4.11.4  -    Add AB, remove ADC
-        -    Fix BHD, Demonoid, TPB, M-T, U2, BTN, BitHD
-
-4.11.5  -    Fix conditional check
-
-4.12    -    Update SDBits, BTN, PTP, TMDB
-        -    Apply some correctness changes
-
-4.12.1  -    Add CCT
-        -    Update CHD, AB, TTG
-
-
-4.12.1-mod1  -   First public release.  New additions, tweaks, bugfixes.
-
-                 What I can remember:
-             -   Added: Blu, Retroflix, ACM, PTE, KG Requests, SC Requests.
-             -   Tweak: Classix search, and split to Movie/TV.
-             -   Tweak: Bunch of 'loggedOutRegex' added.
-             -   Fixed: Bunch of icons.
-             -   Fixed: TL, TPB.
-             -   Fixed: Bug in 'loggedOutRegex' logic.
-             -   New feature: Distinct icons on Requests.
-
-4.12.1-mod2  -   Removed: Canistream.it
-             -   Fixed: Few icons.
-             -   Fixed: Search bug if ampersand is in the title
-
-4.12.1-mod3  -   Removed: RARAT.
-             -   Added: Rarelust & Zooqle.
-             -   New feature: Sites are split to public & private (config menu).
-
-4.12.1-mod4  -   Added: YGG, CG Requests.
-             -   Tweak: CG-Cocks & CG Request icons.
-             -   Tweak: RuT search, split to TV/Movie.
-             -   Fixed: Filter out filled KG Requests.
-             -   New feature: %search_string_orig% (search by the original titles
-                              on the movie/tv pages), enabled on RuT and YGG.
-
-4.12.1-mod5  -   Fixed: CG Request. Demonoid typo.
-
-4.12.1-mod6  -   Removed: HDVN, HoundDawgs.
-             -   Added: 1337x, ETTV, LimeTor, HDSpain, RlsBB, DB, FF, THR, PTer.
-             -   Fixed: TD, Demonoid, RARBG.
-             -   Tweak: Bold'ed the titles of config menu sections for better visibility.
-             -   Tweak: 'Other titles' sorted in alphabetical order.
-             -   Tweak: Added 'loggedOutRegex' to all private & some public sites.
-             -   Fixed: All borked icons are fixed.
-             -   Fixed: Bug in 'loggedOutRegex' (false negative if site responds with redirect).
-
-4.12.1-mod7  -   Added: BRT.
-             -   Tweak: SDBits, U2.
-
-5.0     -   Fix: @namespace & @name changed to fix updating for plugins.
-
-5.1     -   Tweak: TVV, BB-HD.
-        -   Fixed: Invisible icons on dark background JoyHD, Rarelust, CZ, Zooqle, KG.
-        -   New feature: The new layout (icons are placed at top). Option to turn it off.
-        -   New feature: Option to select background for the new layout.
-
-5.2     -   Tweak: Small tweaks (some preferences will reset to default).
-        -   Fixed: Rarelust icon.
-
-5.2.1   -   Fixed: Rarelust icon (forgot to update it)
-        -   Added: RlsBB-Proxy ('RlsBB' now points to the main domain)
-
-5.3     -   Added: Tik-Req, AHD-Req.
-        -   Tweak: No icon borders if "Show results on one line" is off.
-        -   Fixed: Text color on the new layout.
-        -   New feature: Option to change size of the icons.
-
-5.3.1   -   Added: JPTV.
-        -   Fixed: ACM icon.
-
-
--------------------------------------------------------*/
 
 //------------------------------------------------------
 // A list of all the sites, and the data necessary to
@@ -467,10 +79,10 @@
 
 var public_sites = [
   {   'name': '1337x',
-      'searchUrl': 'https://1337x.unblocker.cc/category-search/%search_string%+%year%/Movies/1/',
+      'searchUrl': 'https://1337x.to/category-search/%search_string%+%year%/Movies/1/',
       'matchRegex': /No results were returned/},
   {   'name': '1337x',
-      'searchUrl': 'https://1337x.unblocker.cc/category-search/%search_string%/TV/1/',
+      'searchUrl': 'https://1337x.to/category-search/%search_string%/TV/1/',
       'matchRegex': /No results were returned/,
       'TV': true},
   {   'name': 'Demonoid',
@@ -478,10 +90,10 @@ var public_sites = [
       'loggedOutRegex': /Error 522|Checking your browser|security check to access|daily site maintenance|page is not available/,
       'matchRegex': /No torrents found/,
       'both': true},
-  {   'name': 'ETTV',
-      'searchUrl': 'https://www.ettvdl.com/torrents-search.php?search=%search_string%+%year%',
+  {   'name': 'EZTV',
+      'searchUrl': 'https://eztv.re/search/%search_string%+%year%',
       'matchRegex': /Nothing Found/,
-      'both': true},
+      'TV': true},
   {   'name': 'KZ',
       'searchUrl': 'http://kinozal.tv/browse.php?s=%search_string%+%year%&g=0&c=1002&v=0&d=0&w=0&t=0&f=0',
       'matchRegex': 'Нет активных раздач, приносим извинения. Пожалуйста, уточните параметры поиска'},
@@ -490,7 +102,7 @@ var public_sites = [
       'matchRegex': 'Нет активных раздач, приносим извинения. Пожалуйста, уточните параметры поиска',
       'TV': true},
   {   'name': 'LimeTor',
-      'searchUrl': 'https://limetorrents.unblockit.win/search/movies/%search_string%+%year%/seeds/1/',
+      'searchUrl': 'https://limetorrents.lol/search/movies/%search_string%+%year%/seeds/1/',
       'matchRegex': /csprite_dl14/,
       'positiveMatch': true},
   {   'name': 'NNM',
@@ -541,7 +153,7 @@ var public_sites = [
       'both': true},
   {   'name': 'TGx',
       'icon': 'https://torrentgalaxy.to/common/favicon/favicon-16x16.png',
-      'searchUrl': 'https://torrentgalaxy.org/torrents.php?search=%tt%',
+      'searchUrl': 'https://torrentgalaxy.to/torrents.php?search=%tt%',
       'matchRegex': /No results found/},
   {   'name': 'YGG',
       'searchUrl': 'https://www2.yggtorrent.si/engine/search?name=%search_string_orig%&category=2145&sub_category=all&do=search',
@@ -1478,7 +1090,7 @@ function performWatchlist() {
 //------------------------------------------------------
 
 function performPage() {
-  var movie_title = $('.title_wrapper>h1').clone().children().remove().end().text();
+  var movie_title = $('div.sc-80d4314-0.fjPRnj >div.sc-80d4314-1.fbQftq>h1').clone().children().remove().end().text();
   if (movie_title === "") {
     movie_title = $('h3[itemprop="name"]').text().trim();
   }
@@ -1538,8 +1150,10 @@ function getLinkArea() {
   if ($('h1.header:first').length) {
     $('h1.header:first').parent().append(p);
   } else if (GM_config.get('use_new_layout')) {
-      if ($('.button_panel.navigation_panel').length) {
-      $('.button_panel.navigation_panel').after(p);
+    // This only works on movie pages now, credits page is not supported yet. 
+    // Now works on credits page too.
+    if ($('div.sc-80d4314-0.fjPRnj>div.sc-80d4314-1.fbQftq>h1').length) {
+      $('div.sc-80d4314-0.fjPRnj>div.sc-80d4314-1.fbQftq>h1').parent().append(p);
       } else if ($('.title_block').length) {
         $('.title_block').after(p);
         }
