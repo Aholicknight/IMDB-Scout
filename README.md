@@ -13,7 +13,7 @@ This repo will fix those issues.
 
 # Installation
 
-To install the updated version of IMDB-Scout click the following link [here](https://github.com/Aholicknight/IMDB-Scout/raw/main/imdb-scout.user.js)
+To install the updated version of IMDB-Scout click the following link [here](https://github.com/Aholicknight/IMDb-Scout/raw/master/IMDb_Scout.user.js)
 
 # Checklist
 
