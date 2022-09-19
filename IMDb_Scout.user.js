@@ -1,6 +1,5 @@
 // ==UserScript==
 // @name           IMDB Scout Revamped
-// @author         Aholicknight / kannibalox
 // @namespace      https://github.com/Aholicknight/
 // @description    Revamped version of IMDB Scout for updated IMDB page layout. Add links from IMDb pages to torrent sites -- easy downloading from IMDb
 //
