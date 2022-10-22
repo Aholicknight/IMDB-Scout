@@ -8,12 +8,12 @@
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
 //
 // @version      5.3.5
-// @match        https*://*.imdb.tld/title/tt*
-// @match        https*://*.imdb.tld/search/title*
-// @match        https*://*.imdb.tld/user/*/watchlist*
-// @match        https*://*.imdb.com/title/tt*
-// @match        https*://*.imdb.com/search/title*
-// @match        https*://*.imdb.com/user/*/watchlist*
+// @match        https://*.imdb.tld/title/tt*
+// @match        https://*.imdb.tld/search/title*
+// @match        https://*.imdb.tld/user/*/watchlist*
+// @match        https://*.imdb.com/title/tt*
+// @match        https://*.imdb.com/search/title*
+// @match        https://*.imdb.com/user/*/watchlist*
 //
 // @connect      *
 // @grant        GM_log
