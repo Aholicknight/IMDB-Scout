@@ -7,7 +7,7 @@
 // @require     https://greasyfork.org/libraries/GM_config/20131122/GM_config.js
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
 //
-// @version      5.3.5
+// @version      5.3.7
 // @match        https*://*.imdb.tld/title/tt*
 // @match        https*://*.imdb.tld/search/title*
 // @match        https*://*.imdb.tld/user/*/watchlist*
