@@ -158,7 +158,7 @@ var public_sites = [
   {   'name': 'YGG',
       'searchUrl': 'https://www2.yggtorrent.si/engine/search?name=%search_string_orig%&category=2145&sub_category=all&do=search',
       'matchRegex': 'Aucun résultat !',
-      'both': true}
+      'both': true},
 ];
 
 var private_sites = [
