@@ -1152,8 +1152,8 @@ function getLinkArea() {
   } else if (GM_config.get('use_new_layout')) {
     // This only works on movie pages now, credits page is not supported yet. 
     // Now works on credits page too.
-    if ($('div.sc-80d4314-0.fjPRnj>div.sc-80d4314-1.fbQftq>h1').length) {
-      $('div.sc-80d4314-0.fjPRnj>div.sc-80d4314-1.fbQftq>h1').parent().append(p);
+    if ($('div.sc-80d4314-0.gXdGOt>div.sc-80d4314-1.hbFqAr>h1').length) {
+      $('div.sc-80d4314-0.gXdGOt>div.sc-80d4314-1.hbFqAr>h1').parent().append(p);
       } else if ($('.title_block').length) {
         $('.title_block').after(p);
         }
