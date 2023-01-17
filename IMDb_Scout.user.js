@@ -7,7 +7,7 @@
 // @require     https://greasyfork.org/libraries/GM_config/20131122/GM_config.js
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
 //
-// @version      5.3.7
+// @version      5.3.8
 // @match        https*://*.imdb.tld/title/tt*
 // @match        https*://*.imdb.tld/search/title*
 // @match        https*://*.imdb.tld/user/*/watchlist*
@@ -110,7 +110,7 @@ var public_sites = [
       'matchRegex': 'Не найдено',
       'both': true},
   {   'name': 'RARBG',
-      'searchUrl': 'https://rarbgweb.org/torrents.php?imdb=%tt%',
+      'searchUrl': 'https://rarbg.to/torrents.php?imdb=%tt%',
       'loggedOutRegex': /something wrong|Please wait|enter the captcha/,
       'matchRegex': '//dyncdn.me/static/20/images/imdb_thumb.gif',
       'positiveMatch': true,
@@ -158,12 +158,6 @@ var public_sites = [
   {   'name': 'YGG',
       'searchUrl': 'https://www2.yggtorrent.si/engine/search?name=%search_string_orig%&category=2145&sub_category=all&do=search',
       'matchRegex': 'Aucun résultat !',
-      'both': true},
-  {   'name': 'Zooqle',
-      'icon': 'https://i.imgur.com/jqKceYP.png',
-      'searchUrl': 'https://zooqle.com/search?q=%tt%',
-      'loggedOutRegex': /Error 522|Checking your browser|security check to access/,
-      'matchRegex': 'Sorry, no torrents match',
       'both': true}
 ];
 
