@@ -1090,7 +1090,7 @@ function performWatchlist() {
 //------------------------------------------------------
 
 function performPage() {
-  var movie_title = $('div.sc-80d4314-0.fjPRnj >div.sc-80d4314-1.fbQftq>h1').clone().children().remove().end().text();
+  var movie_title = $('div.sc-80d4314-0.gXdGOt >div.sc-80d4314-1.hbFqAr>h1').clone().children().remove().end().text();
   if (movie_title === "") {
     movie_title = $('h3[itemprop="name"]').text().trim();
   }
