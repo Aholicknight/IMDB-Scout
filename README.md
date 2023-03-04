@@ -4,7 +4,7 @@
 
  Add links from IMDb pages to your favorite torrent sites, public and private trackers supported.
 
-# About
+## About
 
 This is a fork from the userscript [IMDB-Scout](https://greasyfork.org/en/scripts/3967-imdb-scout) from [Greasyfork.org](https://greasyfork.org)
 
@@ -12,11 +12,13 @@ The last update from GreasyFork was in 2020 and is currently broken due to the n
 
 This repo will fix those issues.
 
-# Installation
+Last updated on: 2023-03-04
+
+## Installation
 
 To install the updated version of IMDB-Scout click the following link [here](https://github.com/Aholicknight/IMDb-Scout/raw/master/IMDb_Scout.user.js)
 
-# Checklist
+## Checklist
 
 - [x] Fix movies page
 - [x] Replace HTTP links with HTTPS
