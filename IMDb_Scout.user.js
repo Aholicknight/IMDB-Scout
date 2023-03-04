@@ -7,7 +7,7 @@
 // @require     https://greasyfork.org/libraries/GM_config/20131122/GM_config.js
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
 //
-// @version      5.3.9
+// @version      5.4.0
 // @match        https*://*.imdb.tld/title/tt*
 // @match        https*://*.imdb.tld/search/title*
 // @match        https*://*.imdb.tld/user/*/watchlist*
@@ -1148,7 +1148,7 @@ function getLinkArea() {
     // Now works on credits page too.
     // Fixed on: 2023-03-04
     if ($('div.sc-b5e8e7ce-0.dZsEkQ>div.sc-b5e8e7ce-1.kNhUtn>h1').length) {
-      $('div.sc-b5e8e7ce-0.dZsEkQ>div.sc-sc-b5e8e7ce-1.kNhUtn>h1').parent().append(p);
+      $('div.sc-b5e8e7ce-0.dZsEkQ>div.sc-b5e8e7ce-1.kNhUtn>h1').parent().append(p);
       } else if ($('.title_block').length) {
         $('.title_block').after(p);
         }
