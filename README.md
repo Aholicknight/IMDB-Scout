@@ -4,9 +4,11 @@
 
  Add links from IMDb pages to your favorite torrent sites, public and private trackers supported.
 
+ Due to how old this Userscript being, I will soon check all the public/private trackers used to see if they still work. The ones that do not work will be deleted or replaced with a new URL.
+
 ## About
 
-This is a fork from the userscript [IMDB-Scout](https://greasyfork.org/en/scripts/3967-imdb-scout) from [Greasyfork.org](https://greasyfork.org)
+This is a fork from the userscript [IMDB-Scout](https://greasyfork.org/en/scripts/3967-imdb-scout) from [GreasyFork](https://greasyfork.org).
 
 The last update from GreasyFork was in 2020 and is currently broken due to the new movies page.
 
