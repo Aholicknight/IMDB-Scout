@@ -7,7 +7,7 @@
 // @require     https://greasyfork.org/libraries/GM_config/20131122/GM_config.js
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
 //
-// @version      5.4.0
+// @version      5.4.1
 // @match        https*://*.imdb.tld/title/tt*
 // @match        https*://*.imdb.tld/search/title*
 // @match        https*://*.imdb.tld/user/*/watchlist*
@@ -108,12 +108,6 @@ var public_sites = [
   {   'name': 'NNM',
       'searchUrl': 'https://nnm-club.me/forum/tracker.php?nm=%search_string%+%year%',
       'matchRegex': 'Не найдено',
-      'both': true},
-  {   'name': 'RARBG',
-      'searchUrl': 'https://rarbg.to/torrents.php?imdb=%tt%',
-      'loggedOutRegex': /something wrong|Please wait|enter the captcha/,
-      'matchRegex': '//dyncdn.me/static/20/images/imdb_thumb.gif',
-      'positiveMatch': true,
       'both': true},
   {   'name': 'Rarelust',
       'icon': 'https://i.imgur.com/kaaYhsp.png',
